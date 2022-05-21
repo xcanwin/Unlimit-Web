@@ -17,10 +17,18 @@
 
 ## 用法
 1. 安装 [Tampermonkey](https://www.tampermonkey.net/) 浏览器插件，俗称：油猴；
-2. 安装 Unlimit-Web 脚本，可从下面三个脚本源选一个进行安装：
+2. 安装 Unlimit-Web 脚本，可从下面三个渠道安装：
 
 | 序号 | UserScript源 |
 | --- | --- |
 | 1 | [Github](https://raw.githubusercontent.com/xcanwin/Unlimit-Web/master/Unlimit-Web.user.js) |
 | 2 | [OpenUserJS](https://openuserjs.org/scripts/xcanwin/Unlimit-Web) |
 | 3 | [GreasyFork](https://greasyfork.org/zh-CN/scripts/400515-unlimit-web) |
+
+## 以下网站测试通过
+- [csdn](https://blog.csdn.net/yilovexing/article/details/53256713)
+- [360doc](http://www.360doc.com/content/20/0406/19/1575720_904264035.shtml)
+- [bilibili](https://www.bilibili.com/read/cv5496952)
+- [vue](https://dafrok.github.io/vue-iscroll-view/)
+- [zhangyue](http://shushan.zhangyue.net/book/89159/13507319/)
+- [aqistudy](https://www.aqistudy.cn/)
