@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Html-Lock-Hunter
+// @name         Unlimit-Web
 // @namespace    https://github.com/xcanwin/
 // @version      1.0
 // @description  解除网页限制: 恢复文字的选中和复制, 去除复制时的小尾巴, 恢复页面右键菜单. Remove webpage restrictions: restore the selection and copy of text, remove the text tail, and restore the right-click menu.
@@ -17,7 +17,7 @@
 // @match        *://*/*
 // @run-at       document-end
 //
-// @grant        all
+// @grant        none
 // ==/UserScript==
 
 (function() {
