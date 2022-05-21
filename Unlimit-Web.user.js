@@ -1,35 +1,35 @@
 // ==UserScript==
 // @name         Unlimit-Web
-// @namespace    https://github.com/xcanwin/
-// @version      1.3
-// @description  解除网页限制: 恢复文字的选中和复制, 去除复制时的小尾巴, 恢复页面右键菜单. Remove webpage restrictions: restore the selection and copy of text, remove the text tail, and restore the right-click menu.
+// @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
+// @version      1.4
 // @author       xcanwin
+// @namespace    https://github.com/xcanwin/Unlimit-Web/
+// @supportURL   https://github.com/xcanwin/Unlimit-Web/
 // @license      AGPL
+// @icon         data:image/png;base64,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
 // @updateURL    https://raw.githubusercontent.com/xcanwin/Unlimit-Web/master/Unlimit-Web.user.js
 // @downloadURL  https://raw.githubusercontent.com/xcanwin/Unlimit-Web/master/Unlimit-Web.user.js
-// @supportURL   https://github.com/xcanwin/Unlimit-Web/
-// @match        *://*/*
 // @run-at       document-end
+// @match        *://*/*
 // @grant        none
 // ==/UserScript==
 
 (function() {
 	'use strict';
-    //Test in: https://dafrok.github.io/vue-iscroll-view/
-	//Test in: https://www.cnblogs.com/LyShark/p/12411435.html
-	//Test in: https://www.bilibili.com/read/cv5496952
-	//Test in: http://www.360doc.com/content/20/0406/19/1575720_904264035.shtml
-	//Test in: https://www.cnblogs.com/k8gege/p/11223393.html
-	//Test in: http://shushan.zhangyue.net/book/89159/13507319/
+    // 以下网站测试通过:
+    // https://dafrok.github.io/vue-iscroll-view/
+	// https://www.bilibili.com/read/cv5496952
+	// http://www.360doc.com/content/20/0406/19/1575720_904264035.shtml
+	// http://shushan.zhangyue.net/book/89159/13507319/
+    // https://www.aqistudy.cn/
+    // https://blog.csdn.net/yilovexing/article/details/53256713
 
-	var main = function(){
+	let main = function(){
 		Array.prototype.forEach.call(document.getElementsByTagName("*"), function(el) {
-            console.log(el.childNodes.length);
-
 			[
                 "user-select", "-webkit-user-select", "-moz-user-select", "-ms-user-select", "-khtml-user-select"
             ].forEach(xcanwin => {
-				var filterstyle = document.defaultView.getComputedStyle(el, null)[xcanwin];
+				let filterstyle = document.defaultView.getComputedStyle(el, null)[xcanwin];
 				if (filterstyle && filterstyle == 'none') {
 					el.style[xcanwin] = "text";
 				}
@@ -38,7 +38,7 @@
 			[
                 "pointer-events"
             ].forEach(xcanwin => {
-				var filterstyle = document.defaultView.getComputedStyle(el, null)[xcanwin];
+				let filterstyle = document.defaultView.getComputedStyle(el, null)[xcanwin];
 				if (filterstyle && filterstyle != 'auto') {
 					el.style[xcanwin] = "auto !important";
 				}
@@ -60,5 +60,5 @@
 		});
 	};
 
-	main();
+    main();
 })();
