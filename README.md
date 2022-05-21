@@ -20,6 +20,6 @@
 
 | 序号 | UserScript源 |
 | --- | --- |
-| 1 | [Github](https://raw.githubusercontent.com/xcanwin/Unlimit-Web/master/Unlimit-Web.js) |
+| 1 | [Github](https://raw.githubusercontent.com/xcanwin/Unlimit-Web/master/Unlimit-Web.user.js) |
 | 2 | [OpenUserJS](https://openuserjs.org/scripts/xcanwin/Html-Lock-Hunter) |
 | 3 | [GreasyFork](https://greasyfork.org/zh-CN/scripts/400515-html-lock-hunter) |
