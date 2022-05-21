@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unlimit-Web
 // @namespace    https://github.com/xcanwin/
-// @version      1.1
+// @version      1.2
 // @description  解除网页限制: 恢复文字的选中和复制, 去除复制时的小尾巴, 恢复页面右键菜单. Remove webpage restrictions: restore the selection and copy of text, remove the text tail, and restore the right-click menu.
 // @author       xcanwin
 // @license      MIT
@@ -57,7 +57,7 @@
                 "oncopy", "onbeforecopy",
                 "onkeypress", "onkeyup", "onkeydown",
                 "onpaste", "onbeforepaste", "oncut", "onbeforecut",
-                "onmousedown", "onmouseenter", "onmouseleave", "onmousemove", "onmouseout", "onmouseover", "onmouseup",
+                "onmouseenter", "onmouseleave",
                 "onpointercancel", "onpointerdown", "onpointerenter", "onpointerleave", "onpointerlockchange", "onpointerlockerror", "onpointermove", "onpointerout", "onpointerover", "onpointerrawupdate", "onpointerup"
             ].forEach(xcanwin => {
 				el[xcanwin] = function(e) {
