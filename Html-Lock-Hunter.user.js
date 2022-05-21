@@ -6,6 +6,7 @@
 // @author       xcanwin
 // @license      MIT
 // @updateURL    https://raw.githubusercontent.com/xcanwin/Unlimit-Web/master/Unlimit-Web.js
+// @downloadURL  https://raw.githubusercontent.com/xcanwin/Unlimit-Web/master/Unlimit-Web.js
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
 // @match        *://www.bilibili.com/read/*
 // @match        *://www.360doc.com/*
