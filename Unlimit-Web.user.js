@@ -15,27 +15,27 @@
 // ==/UserScript==
 
 (function() {
-	'use strict';
+    'use strict';
 
-	let main = function(){
-		Array.prototype.forEach.call(document.getElementsByTagName("*"), function(el) {
-			[
+    let main = function(){
+        Array.prototype.forEach.call(document.getElementsByTagName("*"), function(el) {
+            [
                 "user-select", "-webkit-user-select", "-moz-user-select", "-ms-user-select", "-khtml-user-select"
             ].forEach(xcanwin => {
-				let filterstyle = document.defaultView.getComputedStyle(el, null)[xcanwin];
-				if (filterstyle && filterstyle == 'none') {
-					el.style[xcanwin] = "text";
-				}
-			});
+                let filterstyle = document.defaultView.getComputedStyle(el, null)[xcanwin];
+                if (filterstyle && filterstyle == 'none') {
+                    el.style[xcanwin] = "text";
+                }
+            });
 
-			[
+            [
                 "pointer-events"
             ].forEach(xcanwin => {
-				let filterstyle = document.defaultView.getComputedStyle(el, null)[xcanwin];
-				if (filterstyle && filterstyle != 'auto') {
-					el.style[xcanwin] = "auto !important";
-				}
-			});
+                let filterstyle = document.defaultView.getComputedStyle(el, null)[xcanwin];
+                if (filterstyle && filterstyle != 'auto') {
+                    el.style[xcanwin] = "auto !important";
+                }
+            });
 
             [
                 "onselect", "onselectstart", "onselectionchange",
@@ -46,12 +46,12 @@
                 "onmouseenter", "onmouseleave",
                 "onpointercancel", "onpointerdown", "onpointerenter", "onpointerleave", "onpointerlockchange", "onpointerlockerror", "onpointermove", "onpointerout", "onpointerover", "onpointerrawupdate", "onpointerup"
             ].forEach(xcanwin => {
-				el[xcanwin] = function(e) {
-					e.stopImmediatePropagation();
-				}
-			});
-		});
-	};
+                el[xcanwin] = function(e) {
+                    e.stopImmediatePropagation();
+                }
+            });
+        });
+    };
 
     main();
 })();
