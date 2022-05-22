@@ -43,6 +43,7 @@
 - [aqistudy](https://www.aqistudy.cn/)
 - [xuexila](https://www.xuexila.com/zw/zhidao/c1405991.html)
 - [51test](https://www.51test.net/show/10550483.html)
+- [laokaoya](http://www.laokaoya.com/)
 
 ## 友情链接
-对百x度文库、道x客巴巴等文库类网站有需要的可以试试隔壁老哥的项目 [TKScript](https://greasyfork.org/zh-CN/scripts/405130-%E6%96%87%E6%9C%AC%E9%80%89%E4%B8%AD%E5%A4%8D%E5%88%B6)，他有针对文库的方案
+需要对百x度文库、道x客巴巴等文库类网站解除限制的伙伴可以试试隔壁老哥的项目 [TKScript](https://greasyfork.org/zh-CN/scripts/405130-%E6%96%87%E6%9C%AC%E9%80%89%E4%B8%AD%E5%A4%8D%E5%88%B6)

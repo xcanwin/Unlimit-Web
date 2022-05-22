@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unlimit-Web
 // @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
-// @version      2.0
+// @version      3.0
 // @author       xcanwin
 // @namespace    https://github.com/xcanwin/Unlimit-Web/
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
@@ -20,20 +20,15 @@
     let main = function(){
         Array.prototype.forEach.call(document.getElementsByTagName("*"), function(el) {
             [
-                "user-select", "-webkit-user-select", "-moz-user-select", "-ms-user-select", "-khtml-user-select"
+                "user-select", "-webkit-user-select", "-moz-user-select", "-ms-user-select", "-khtml-user-select", "pointer-events"
             ].forEach(xcanwin => {
-                let filterstyle = document.defaultView.getComputedStyle(el, null)[xcanwin];
-                if (filterstyle && filterstyle == 'none') {
-                    el.style[xcanwin] = "text";
-                }
-            });
-
-            [
-                "pointer-events"
-            ].forEach(xcanwin => {
-                let filterstyle = document.defaultView.getComputedStyle(el, null)[xcanwin];
-                if (filterstyle && filterstyle != 'auto') {
-                    el.style[xcanwin] = "auto !important";
+                let ec = el.childNodes;
+                let j1 = ec && ec.length == 1 && ec[0] && ec[0].nodeType && ec[0].nodeType == 3;
+                let style = document.defaultView.getComputedStyle(el, null)[xcanwin];
+                let j2 = style && style != 'auto';
+                if (j1 || j2){
+                    // 处理第一个子标签是text类型的标签，处理select值被修改过的标签
+                    el.style.setProperty(xcanwin, "text", "important");
                 }
             });
 
@@ -72,7 +67,6 @@
                     }
                 }
             });
-
         });
     };
 
