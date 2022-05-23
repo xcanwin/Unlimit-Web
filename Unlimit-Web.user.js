@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unlimit-Web
 // @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
-// @version      3.0
+// @version      3.3
 // @author       xcanwin
 // @namespace    https://github.com/xcanwin/Unlimit-Web/
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
@@ -20,7 +20,7 @@
     let main = function(){
         Array.prototype.forEach.call(document.getElementsByTagName("*"), function(el) {
             [
-                "user-select", "-webkit-user-select", "-moz-user-select", "-ms-user-select", "-khtml-user-select", "pointer-events"
+                "user-select", "-webkit-user-select", "-moz-user-select", "-ms-user-select", "-khtml-user-select", "pointer-events",
             ].forEach(xcanwin => {
                 let ec = el.childNodes;
                 let j1 = ec && ec.length == 1 && ec[0] && ec[0].nodeType && ec[0].nodeType == 3;
@@ -37,32 +37,33 @@
                 "oncontextmenu",
                 "oncopy", "onbeforecopy",
                 "onpaste", "onbeforepaste", "oncut", "onbeforecut",
-                "onpointercancel", "onpointerdown", "onpointerenter", "onpointerleave", "onpointerlockchange", "onpointerlockerror", "onpointermove", "onpointerout", "onpointerover", "onpointerrawupdate", "onpointerup"
+                "onpointercancel", "onpointerdown", "onpointerenter", "onpointerleave", "onpointerlockchange", "onpointerlockerror", "onpointermove", "onpointerout", "onpointerover", "onpointerrawupdate", "onpointerup",
             ].forEach(xcanwin => {
                 el[xcanwin] = function(e) {
+                    // 处理能影响文本的事件
                     e.stopImmediatePropagation();
                 }
             });
 
             [
-                "onmouseenter", "onmouseleave", "onmousedown", "onmouseenter", "onmouseleave", "onmousemove", "onmouseout", "onmouseover", "onmouseup"
+                "onmouseenter", "onmouseleave", "onmousedown", "onmouseenter", "onmouseleave", "onmousemove", "onmouseout", "onmouseover", "onmouseup",
             ].forEach(xcanwin => {
                 el[xcanwin] = function(e) {
-                    if ([ "P" ].indexOf(e.target.nodeName) >=0) {
-                        // 处理html文本标签
+                    if ([ "P" ].indexOf(e.target.nodeName) >=0 && e.button && e.button == 0) {
+                        // 处理左键下的html文本标签
                         e.stopImmediatePropagation();
                     }
                 }
             });
 
             [
-                "onkeypress", "onkeyup", "onkeydown"
+                "onkeypress", "onkeyup", "onkeydown",
             ].forEach(xcanwin => {
                 el[xcanwin] = function(e) {
                     let keyCode = e.keyCode || e.which || e.charCode;
                     let ctrlKey = e.ctrlKey || e.metaKey;
-                    if (ctrlKey && keyCode == 67) {
-                        // 处理ctrl+c
+                    if ((ctrlKey && keyCode == 67) || keyCode == 123) {
+                        // 处理ctrl+c和F12
                         e.stopImmediatePropagation();
                     }
                 }
