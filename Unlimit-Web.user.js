@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unlimit-Web
 // @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
-// @version      3.3
+// @version      3.4
 // @author       xcanwin
 // @namespace    https://github.com/xcanwin/Unlimit-Web/
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
@@ -34,7 +34,6 @@
 
             [
                 "onselect", "onselectstart", "onselectionchange",
-                "oncontextmenu",
                 "oncopy", "onbeforecopy",
                 "onpaste", "onbeforepaste", "oncut", "onbeforecut",
                 "onpointercancel", "onpointerdown", "onpointerenter", "onpointerleave", "onpointerlockchange", "onpointerlockerror", "onpointermove", "onpointerout", "onpointerover", "onpointerrawupdate", "onpointerup",
@@ -64,6 +63,17 @@
                     let ctrlKey = e.ctrlKey || e.metaKey;
                     if ((ctrlKey && keyCode == 67) || keyCode == 123) {
                         // 处理ctrl+c和F12
+                        e.stopImmediatePropagation();
+                    }
+                }
+            });
+
+            [
+                "oncontextmenu",
+            ].forEach(xcanwin => {
+                el[xcanwin] = function(e) {
+                    if (e.target && e.target.offsetTop !== undefined){
+                        // 处理常规右键，跳过右键手势
                         e.stopImmediatePropagation();
                     }
                 }
