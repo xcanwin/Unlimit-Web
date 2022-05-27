@@ -1,9 +1,9 @@
 # Unlimit-Web
 
 ## 简介
-- 可以解除常见的网页限制：恢复文本的选中，恢复文本的复制，移除文本小尾巴，恢复右键菜单
-- 兼容99%的网站，实测发现：本项目的兼容性比号称"通杀大部分网站"的同类项目还强
-- 喜欢这个脚本的小伙伴，可以给我的 [GITHUB项目 Unlimit-Web](https://github.com/xcanwin/Unlimit-Web/) 点个STAR支持一下
+- 可以破解网页各种限制：可以破解无法选中和复制文本的限制，移除粘贴文本时的小尾巴，恢复网页右键和F12。
+- 兼容99%的网站，实测发现：本项目的兼容性和精准度都比同类项目强。
+- 喜欢这个脚本的小伙伴，可以给我的GITHUB项目 [Unlimit-Web](https://github.com/xcanwin/Unlimit-Web/) 点个STAR支持一下。
 
 ## 项目来源
 - 在上网学习过程中，常常遇到以下的痛点：
@@ -13,7 +13,6 @@
 - 即使成功复制了，粘贴时发现还加一个提示来源的文本小尾巴
 - 我看网站开发者是有什么大病
 - 本脚本的作用就是解决以上自己的痛点和网站开发者的大病，解除网页限制，实现畅快地上网学习
-- 原项目Html-Lock-Hunter不再更新，Unlimit-Web是全新的版本
 
 ## 解除以下网页限制
 1. 恢复文本的选中和复制
@@ -21,12 +20,12 @@
 3. 恢复右键菜单
 
 ## 用法
-1. 安装 [Tampermonkey](https://www.tampermonkey.net/) 浏览器插件，俗称：油猴；
+1. 安装 [Tampermonkey](https://www.tampermonkey.net/) 浏览器插件；
 2. 安装 Unlimit-Web 脚本，可从下面三个渠道安装：
 
 | 序号 | UserScript源 |
 | --- | --- |
-| 1 | [Github](https://raw.githubusercontent.com/xcanwin/Unlimit-Web/master/Unlimit-Web.user.js) |
+| 1 | [Github](https://raw.githubusercontent.com/xcanwin/Unlimit-Web/main/Unlimit-Web.user.js) |
 | 2 | [OpenUserJS](https://openuserjs.org/scripts/xcanwin/Unlimit-Web) |
 | 3 | [GreasyFork](https://greasyfork.org/zh-CN/scripts/400515-unlimit-web) |
 
