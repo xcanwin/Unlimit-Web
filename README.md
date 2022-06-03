@@ -33,6 +33,7 @@
 - [csdn](https://blog.csdn.net/yilovexing/article/details/53256713)
 - [bilibili](https://www.bilibili.com/read/cv5496952)
 - [360doc](http://www.360doc.com/content/20/0406/19/1575720_904264035.shtml)
+- [book.qq](https://book.qq.com/book-read/468914/1)
 - [yuedu.163](https://guofeng.yuedu.163.com/book_reader/654ebfbcccd64b3ea0a51934953f300e_4)
 - [kuwo](https://www.kuwo.cn/play_detail/6871880)
 - [chuangshi.qq](https://chuangshi.qq.com/bk/xh/AGwENV1oVjIAP1RkATUBYA-r-1.html)
@@ -43,6 +44,13 @@
 - [xuexila](https://www.xuexila.com/zw/zhidao/c1405991.html)
 - [51test](https://www.51test.net/show/10550483.html)
 - [laokaoya](http://www.laokaoya.com/)
+- [utaten](https://utaten.com/lyric/ja00004711/)
+- [mbalib](https://doc.mbalib.com/view/e61654c0fdd034c5cdce2879f29940d0.html)
+- [oh100](https://www.oh100.com/zhichang/4606252.html)
+- [cspengbo](https://www.cspengbo.com/show-13-777229-1.html)
+- [diyifanwen](https://www.diyifanwen.com/fanwen/chunjie/5063917.html)
+- [ahsrst](https://www.ahsrst.cn/a/202204/537959.html)
+- [kt250](https://www.kt250.com/fanwen/shixizongjie/2869992.html)
 
 ## 友情链接
 需要对百x度文库、道x客巴巴等文库类网站解除限制的伙伴可以试试隔壁老哥的项目 [TKScript](https://greasyfork.org/zh-CN/scripts/405130-%E6%96%87%E6%9C%AC%E9%80%89%E4%B8%AD%E5%A4%8D%E5%88%B6)

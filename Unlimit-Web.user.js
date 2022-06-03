@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unlimit-Web
 // @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
-// @version      4.1
+// @version      4.2
 // @author       xcanwin
 // @namespace    https://github.com/xcanwin/Unlimit-Web/
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
@@ -11,6 +11,28 @@
 // @downloadURL  https://raw.githubusercontent.com/xcanwin/Unlimit-Web/main/Unlimit-Web.user.js
 // @run-at       document-end
 // @match        *://*/*
+// @match        *://blog.csdn.net/*
+// @match        *://www.bilibili.com/*
+// @match        *://360doc.com/*
+// @match        *://guofeng.yuedu.163.com/*
+// @match        *://kuwo.cn/*
+// @match        *://chuangshi.qq.com/*
+// @match        *://read.qidian.com/*
+// @match        *://dafrok.github.io/*
+// @match        *://shushan.zhangyue.net/*
+// @match        *://aqistudy.cn/*
+// @match        *://xuexila.com/*
+// @match        *://51test.net/*
+// @match        *://laokaoya.com/*
+// @match        *://utaten.com/*
+// @match        *://book.qq.com/*
+// @match        *://doc.mbalib.com/*
+// @match        *://oh100.com/*
+// @match        *://51test.net/*
+// @match        *://cspengbo.com/*
+// @match        *://diyifanwen.com/*
+// @match        *://ahsrst.cn/*
+// @match        *://kt250.com/*
 // @grant        none
 // ==/UserScript==
 
