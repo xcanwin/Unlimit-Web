@@ -4,6 +4,14 @@
 
 <img src="/assets/Unlimit-Web.png" width="750"></img>
 
+<br>
+
+<img alt="version" src="https://img.shields.io/greasyfork/v/400515?style=for-the-badge&label=%E7%89%88%E6%9C%AC&logo=velog&logoColor=BE95FF&color=7B68EE"></img>
+<img alt="download" src="https://img.shields.io/greasyfork/dt/400515?style=for-the-badge&label=%E7%94%A8%E6%88%B7%E5%AE%89%E8%A3%85%E9%87%8F&logo=bilibili&logoColor=78FF96"></img>
+<img alt="stars" src="https://img.shields.io/github/stars/xcanwin/Unlimit-Web?style=for-the-badge&label=Stars&logo=undertale&logoColor=red&color=orange"></img>
+<img alt="forks" src="https://img.shields.io/github/forks/xcanwin/Unlimit-Web?style=for-the-badge&label=Forks&logo=stackshare&logoColor=green&color=0AC18E"></img>
+<img alt="javascript" src="https://img.shields.io/badge/JavaScript-%3E%3DES13-green?style=for-the-badge&label=JavaScript&logo=JavaScript&color=FDEE21"></img>
+
 </div></center>
 
 <br>
@@ -32,22 +40,21 @@
 
 ## 用法
 
-1. 浏览器首选```Chrome```、```Firefox```、```Edge```，其他主流浏览器都是主动兼容这3个浏览器的；
-2. 安装```Tampermonkey```浏览器拓展，可以从 [Tampermonkey官网](https://www.tampermonkey.net/) 安装；
-3. 安装```Unlimit-Web```插件，可以从 [安装渠道](#安装渠道) 选一个渠道安装；
-4. 在网址栏打开```限制你的网站```，然后点击右上角的```Tampermonkey```浏览器拓展LOGO，点击```Unlimit-Web```插件里的```尝试破解```，然后自行验证是否破解成功；
-5. 若成功了，则可以把```加入自动破解列表```的```✔️```选上，这样该域名下的所有页面以后都会自动破解。
+1. 安装```Tampermonkey```，通过 [官网](https://www.tampermonkey.net/)；
+2. 安装```Unlimit-Web```，通过 [安装渠道](#安装渠道)；
+3. 访问 ```目标网站```，右键 -> ```Tampermonkey``` -> ```Unlimit-Web``` -> ```尝试破解```；
+4. 破解成功
 
 ## 安装渠道
 
-| 序号 | UserScript源 |
-| --- | --- |
-| 1 | [Github](https://raw.githubusercontent.com/xcanwin/Unlimit-Web/main/Unlimit-Web.user.js) |
-| 2 | [GreasyFork](https://greasyfork.org/zh-CN/scripts/400515-unlimit-web) |
+| 序号 | UserScript源 | 备注 |
+| --- | --- | --- |
+| 1 | [Github开源社区](https://raw.githubusercontent.com/xcanwin/Unlimit-Web/main/Unlimit-Web.user.js) | ✅推荐 |
+| 2 | [GreasyFork开源社区](https://greasyfork.org/zh-CN/scripts/400515-unlimit-web) | ✅推荐 |
 
 ## 成功案例
 
-可以在安装本插件之前打开以下网站体验被限制的效果，然后安装本插件之后再体验一下破解限制的效果。以下所有域名都在本插件自动破解列表里：
+大家可以在以下网站尝试选中、复制、粘贴：
 
 - [blog.csdn.net](https://blog.csdn.net/yilovexing/article/details/53256713)
 - [www.bilibili.com](https://www.bilibili.com/read/cv5496952)
