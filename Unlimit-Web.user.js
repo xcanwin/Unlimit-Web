@@ -1,35 +1,35 @@
 // ==UserScript==
 // @name         Unlimit-Web
 // @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
-// @version      7.0
+// @version      8.0
 // @author       xcanwin
 // @namespace    https://github.com/xcanwin/Unlimit-Web/
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
-// @updateURL    https://greasyfork.org/scripts/400515-unlimit-web/code/Unlimit-Web.user.js
-// @downloadURL  https://greasyfork.org/scripts/400515-unlimit-web/code/Unlimit-Web.user.js
+// @updateURL    https://update.greasyfork.org/scripts/400515/Unlimit-Web.meta.js
+// @downloadURL  https://update.greasyfork.org/scripts/400515/Unlimit-Web.user.js
 // @icon         data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" stroke-width="2" fill="none" stroke="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
 // @license      GPL-2.0-only
 // @match        *://blog.csdn.net/*
 // @match        *://www.bilibili.com/*
-// @match        *://360doc.com/*
+// @match        *://www.360doc.com/*
 // @match        *://guofeng.yuedu.163.com/*
-// @match        *://kuwo.cn/*
+// @match        *://www.kuwo.cn/*
 // @match        *://chuangshi.qq.com/*
 // @match        *://read.qidian.com/*
 // @match        *://dafrok.github.io/*
 // @match        *://shushan.zhangyue.net/*
 // @match        *://aqistudy.cn/*
-// @match        *://xuexila.com/*
-// @match        *://51test.net/*
-// @match        *://laokaoya.com/*
+// @match        *://www.xuexila.com/*
+// @match        *://www.51test.net/*
+// @match        *://www.laokaoya.com/*
 // @match        *://utaten.com/*
 // @match        *://book.qq.com/*
 // @match        *://doc.mbalib.com/*
-// @match        *://oh100.com/*
+// @match        *://www.oh100.com/*
 // @match        *://51test.net/*
-// @match        *://cspengbo.com/*
-// @match        *://diyifanwen.com/*
-// @match        *://ahsrst.cn/*
+// @match        *://www.cspengbo.com/*
+// @match        *://www.diyifanwen.com/*
+// @match        *://www.ahsrst.cn/*
 // @match        *://kt250.com/*
 // @match        *://*/*
 // @grant        GM_getValue
@@ -45,7 +45,8 @@
     const $ = (Selector, el) => (el || document).querySelector(Selector);
     const $$ = (Selector, el) => (el || document).querySelectorAll(Selector);
 
-    const symbol = "❌✔️";
+    const symbol = ["❌", "✔️"];
+    const symbol2 = ["未勾选", "已勾选"];
     let mc = []
 
     const sv = (key, value = "") => {
@@ -146,7 +147,7 @@
 
     /*初始化自动破解列表*/
     const initAutoList = () => {
-        const defaultal = ["blog.csdn.net","www.bilibili.com","360doc.com","guofeng.yuedu.163.com","kuwo.cn","chuangshi.qq.com","read.qidian.com","dafrok.github.io","shushan.zhangyue.net","aqistudy.cn","xuexila.com","51test.net","laokaoya.com","utaten.com","book.qq.com","doc.mbalib.com","oh100.com","51test.net","cspengbo.com","diyifanwen.com","ahsrst.cn","kt250.com"];
+        const defaultal = ["blog.csdn.net","www.bilibili.com","www.360doc.com","guofeng.yuedu.163.com","www.kuwo.cn","chuangshi.qq.com","read.qidian.com","dafrok.github.io","shushan.zhangyue.net","aqistudy.cn","www.xuexila.com","www.51test.net","www.laokaoya.com","utaten.com","book.qq.com","doc.mbalib.com","www.oh100.com","51test.net","www.cspengbo.com","www.diyifanwen.com","www.ahsrst.cn","kt250.com"];
         //为空或者为[]时，说明首次运行，进行初始化
         if (gv("ul_autolist", "[]") === "[]") {
             sv("ul_autolist", JSON.stringify(defaultal));
@@ -175,8 +176,8 @@
         } else {
             isauto = 0;
         }
-        mc.push(GM_registerMenuCommand(`尝试破解`, unLimit));
-        mc.push(GM_registerMenuCommand(`加入自动破解列表 ${symbol[isauto]}`, switchAuto));
+        mc.push(GM_registerMenuCommand(`临时破解：当前页面`, unLimit));
+        mc.push(GM_registerMenuCommand(`自动破解：${domain} ${symbol[isauto]}${symbol2[isauto]}`, switchAuto));
         mc.push(GM_registerMenuCommand(`查看自动破解列表`, showAuto));
     };
 
