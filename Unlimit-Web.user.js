@@ -1,12 +1,10 @@
 // ==UserScript==
 // @name         Unlimit-Web
 // @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
-// @version      8.0
+// @version      8.1
 // @author       xcanwin
 // @namespace    https://github.com/xcanwin/Unlimit-Web/
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
-// @updateURL    https://update.greasyfork.org/scripts/400515/Unlimit-Web.meta.js
-// @downloadURL  https://update.greasyfork.org/scripts/400515/Unlimit-Web.user.js
 // @icon         data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" stroke-width="2" fill="none" stroke="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
 // @license      GPL-2.0-only
 // @match        *://blog.csdn.net/*
@@ -37,6 +35,8 @@
 // @grant        GM_registerMenuCommand
 // @grant        GM_unregisterMenuCommand
 // @run-at       document-end
+// @downloadURL https://update.greasyfork.org/scripts/400515/Unlimit-Web.user.js
+// @updateURL https://update.greasyfork.org/scripts/400515/Unlimit-Web.meta.js
 // ==/UserScript==
 
 (function() {
