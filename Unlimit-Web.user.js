@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unlimit-Web
 // @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
-// @version      8.1
+// @version      9.0
 // @author       xcanwin
 // @namespace    https://github.com/xcanwin/Unlimit-Web/
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
@@ -128,9 +128,9 @@
     };
 
     /*加入自动破解列表*/
-    const switchAuto = () => {
+    const switchAuto = (domain) => {
         let autolist = JSON.parse(gv("ul_autolist", "[]"));
-        const domain = getdomain();
+        domain = domain ? domain : getdomain();
         if (autolist.includes(domain)) {
             autolist = autolist.filter(el => el !== domain);
         } else {
@@ -138,6 +138,7 @@
         }
         sv("ul_autolist", JSON.stringify(autolist));
         rmc();
+        unLimit();
     };
 
     /*查看自动破解列表*/
@@ -176,8 +177,8 @@
         } else {
             isauto = 0;
         }
-        mc.push(GM_registerMenuCommand(`临时破解：当前页面`, unLimit));
-        mc.push(GM_registerMenuCommand(`自动破解：${domain} ${symbol[isauto]}${symbol2[isauto]}`, switchAuto));
+        mc.push(GM_registerMenuCommand(`临时破解：${domain}`, unLimit));
+        mc.push(GM_registerMenuCommand(`自动破解：${domain} ${symbol[isauto]}${symbol2[isauto]}`, () => switchAuto(domain)));
         mc.push(GM_registerMenuCommand(`查看自动破解列表`, showAuto));
     };
 
