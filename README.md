@@ -40,9 +40,9 @@
 
 ## 用法
 
-1. 安装```Tampermonkey```，通过 [官网](https://www.tampermonkey.net/)；
-2. 安装```Unlimit-Web```，通过 [安装渠道](#安装渠道)；
-3. 访问 ```目标网站```，右键 -> ```Tampermonkey``` -> ```Unlimit-Web``` -> ```尝试破解```；
+1. 安装`Tampermonkey`，通过 [官网](https://www.tampermonkey.net/)；
+2. 安装`Unlimit-Web`，通过 [安装渠道](#安装渠道)；
+3. 访问`目标网站`，右键 -> `Tampermonkey` -> `Unlimit-Web` -> `尝试破解`；
 4. 破解成功
 
 ## 安装渠道
@@ -56,6 +56,7 @@
 
 大家可以在以下网站尝试选中、复制、粘贴：
 
+- [www.zhihu.com](https://www.zhihu.com/question/65467081)
 - [blog.csdn.net](https://blog.csdn.net/yilovexing/article/details/53256713)
 - [www.bilibili.com](https://www.bilibili.com/read/cv5496952)
 - [www.360doc.com](http://www.360doc.com/content/20/0406/19/1575720_904264035.shtml)
