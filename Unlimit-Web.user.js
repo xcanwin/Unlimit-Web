@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unlimit-Web
 // @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
-// @version      11.0
+// @version      12.0
 // @author       xcanwin
 // @namespace    https://github.com/xcanwin/Unlimit-Web/
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
@@ -46,9 +46,27 @@
     const $ = (Selector, el) => (el || document).querySelector(Selector);
     const $$ = (Selector, el) => (el || document).querySelectorAll(Selector);
 
-    const symbol = ["❌", "✔️"];
+    const muob = (Selector, el, func) => {
+        const observer = new MutationObserver((mutationsList, observer2) => {
+            for (let mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    const target = mutation.target.querySelector(Selector);
+                    if (target && !target.hasAttribute('data-duplicate')) {
+                        target.setAttribute('data-duplicate', 'true');
+                        func(target);
+                    }
+                }
+            }
+        });
+        observer.observe(el, {
+            childList: true,
+            subtree: true
+        });
+    };
+
+    const symbol = ["❎", "✅"];
     const symbol2 = ["未勾选", "已勾选"];
-    let mc = []
+    let mc = [];
 
     const sv = (key, value = "") => {
         GM_setValue(key, value);
@@ -58,74 +76,77 @@
         return GM_getValue(key, value);
     };
 
-    const unLimit = () => {
-        $$("*").forEach(el => {
-            [
-                "user-select", "-webkit-user-select", "-moz-user-select", "-ms-user-select", "-khtml-user-select", "pointer-events",
-            ].forEach(xcanwin => {
-                const ec = el.childNodes;
-                const j1 = ec && ec.length == 1 && ec[0] && ec[0].nodeType && ec[0].nodeType == 3;
-                const style = document.defaultView.getComputedStyle(el, null)[xcanwin];
-                const j2 = style && style != 'auto';
-                if (j1 || j2){
-                    // 处理第一个子标签是text类型的标签 或者 处理select值被修改过的标签
-                    el.style.setProperty(xcanwin, "unset", "important");
-                }
-            });
-
-            [
-                "onselect", "onselectstart", "onselectionchange",
-                "oncopy", "onbeforecopy",
-                "onpaste", "onbeforepaste", "oncut", "onbeforecut",
-                "onpointercancel", "onpointerdown", "onpointerenter", "onpointerleave", "onpointerlockchange", "onpointerlockerror", "onpointermove", "onpointerout", "onpointerover", "onpointerrawupdate", "onpointerup",
-            ].forEach(xcanwin => {
-                el[xcanwin] = e => {
-                    // 处理能影响文本的事件
-                    e.stopImmediatePropagation();
-                }
-            });
-
-            [
-                "onmouseenter", "onmousedown", "onmouseup", "onmouseout", "onmouseleave", "onmouseover",
-            ].forEach(xcanwin => {
-                el[xcanwin] = e => {
-                    if ([ "P" ].indexOf(e.target.nodeName) >=0 && e.button == 0) {
-                        // 处理单击左键和滑动左键下的html文本标签
-                        e.stopImmediatePropagation();
-                    }
-                }
-            });
-
-            [
-                "onkeypress", "onkeyup", "onkeydown",
-            ].forEach(xcanwin => {
-                el[xcanwin] = e => {
-                    const keyCode = e.keyCode || e.which || e.charCode;
-                    const ctrlKey = e.ctrlKey || e.metaKey;
-                    if ((ctrlKey && keyCode == 67) || keyCode == 123) {
-                        // 处理ctrl+c和F12
-                        e.stopImmediatePropagation();
-                    }
-                }
-            });
-
-            [
-                "oncontextmenu",
-            ].forEach(xcanwin => {
-                el[xcanwin] = e => {
-                    if (e.target && e.target.points == undefined){
-                        // 处理普通的单击右键，跳过滑动右键
-                        e.stopImmediatePropagation();
-                    }
-                }
-            });
-        });
-
+    /*枚举元素*/
+    const eNum = (EL = null) => {
+        $$("*", EL).forEach(unLimit);
         try {
             console.clear = () => {};
             window.debugger = () => {};
         } catch (e) {
         }
+    };
+
+    /*解除限制*/
+    const unLimit = (el = null) => {
+        [
+            "user-select", "-webkit-user-select", "-moz-user-select", "-ms-user-select", "-khtml-user-select", "pointer-events",
+        ].forEach(xcanwin => {
+            const ec = el.childNodes;
+            const j1 = ec && ec.length == 1 && ec[0] && ec[0].nodeType && ec[0].nodeType == 3;
+            const style = document.defaultView.getComputedStyle(el, null)[xcanwin];
+            const j2 = style && style != 'auto';
+            if (j1 || j2){
+                // 处理第一个子标签是text类型的标签 或者 处理select值被修改过的标签
+                el.style.setProperty(xcanwin, "unset", "important");
+            }
+        });
+
+        [
+            "onselect", "onselectstart", "onselectionchange",
+            "oncopy", "onbeforecopy",
+            "onpaste", "onbeforepaste", "oncut", "onbeforecut",
+            "onpointercancel", "onpointerdown", "onpointerenter", "onpointerleave", "onpointerlockchange", "onpointerlockerror", "onpointermove", "onpointerout", "onpointerover", "onpointerrawupdate", "onpointerup",
+        ].forEach(xcanwin => {
+            el[xcanwin] = e => {
+                // 处理能影响文本的事件
+                e.stopImmediatePropagation();
+            }
+        });
+
+        [
+            "onmouseenter", "onmousedown", "onmouseup", "onmouseout", "onmouseleave", "onmouseover",
+        ].forEach(xcanwin => {
+            el[xcanwin] = e => {
+                if ([ "P" ].indexOf(e.target.nodeName) >=0 && e.button == 0) {
+                    // 处理单击左键和滑动左键下的html文本标签
+                    e.stopImmediatePropagation();
+                }
+            }
+        });
+
+        [
+            "onkeypress", "onkeyup", "onkeydown",
+        ].forEach(xcanwin => {
+            el[xcanwin] = e => {
+                const keyCode = e.keyCode || e.which || e.charCode;
+                const ctrlKey = e.ctrlKey || e.metaKey;
+                if ((ctrlKey && keyCode == 67) || keyCode == 123) {
+                    // 处理ctrl+c和F12
+                    e.stopImmediatePropagation();
+                }
+            }
+        });
+
+        [
+            "oncontextmenu",
+        ].forEach(xcanwin => {
+            el[xcanwin] = e => {
+                if (e.target && e.target.points == undefined){
+                    // 处理普通的单击右键，跳过滑动右键
+                    e.stopImmediatePropagation();
+                }
+            }
+        });
     };
 
     /*加入自动破解列表*/
@@ -193,10 +214,11 @@
         const autolist = JSON.parse(gv("ul_autolist", "[]"));
         const domain = getdomain();
         if (autolist.includes(domain)) {
-            unLimit();
-            setInterval(() => {
-                unLimit()
-            }, 3000);
+            eNum();
+            setInterval(eNum, 3000);
+            muob(`*`, $(`body`), (el) => {
+                unLimit(el);
+            });
         }
     };
 
