@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unlimit-Web
 // @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
-// @version      13.0
+// @version      13.1
 // @author       xcanwin
 // @namespace    https://github.com/xcanwin/Unlimit-Web/
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
@@ -105,7 +105,7 @@
 
     /*判断是否包含*/
     const isIn = (el, list) => {
-        return list.element.some(item => item.toLowerCase() === el.toLowerCase());
+        return list.some(item => item.toLowerCase() === el.toLowerCase());
     };
 
     /*解除限制*/
@@ -218,7 +218,7 @@
         let isauto;
         const autolist = JSON.parse(gv("ul_autolist", "[]"));
         const domain = getdomain();
-        if (isIn(domain, autolist.concat(block_list.domain.block))) {
+        if (isIn(domain, autolist.concat(block_list.domain.hard))) {
             isauto = 1;
         } else {
             isauto = 0;
@@ -237,7 +237,7 @@
         rmc();
         const autolist = JSON.parse(gv("ul_autolist", "[]"));
         const domain = getdomain();
-        if (isIn(domain, autolist.concat(block_list.domain.block))) {
+        if (isIn(domain, autolist.concat(block_list.domain.hard))) {
             eNum();
             setInterval(eNum, 3000);
             muob(`*`, $(`body`), (el) => {
