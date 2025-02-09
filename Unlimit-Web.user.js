@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unlimit-Web
 // @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
-// @version      15.1
+// @version      16.0
 // @author       xcanwin
 // @namespace    https://github.com/xcanwin/Unlimit-Web/
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
@@ -80,9 +80,9 @@
         // 网页元素名称
         element: ['script', 'style', 'video'],
         // 网页元素id
-        id: ['player', 'video'],
+        id: ['video'],
         // 网页元素className
-        className: ['player', 'video'],
+        className: ['video'],
     };
 
     const symbol = ["❎", "✅"];
@@ -108,20 +108,32 @@
     };
 
     /*判断是否包含*/
-    const isIn = (el, list) => {
-        return list.some(item => item === el);
+    const isIn = (el, list, type) => {
+        /*
+        例如 'video' 包含于 ['hello', 'video']
+        例如 'video' 模糊包含于 ['hello', 'good_player_top']
+        例如 'good_video_top' 特殊包含于 ['hello', 'video']
+        */
+        switch (type) {
+            case 'fuzzy': // 模糊包含
+                return list.some(item => item === el || item.includes(el));
+            case 'fancy': // 特殊包含
+                return list.some(item => item === el || el.includes(item));
+            default: // 正常包含
+                return list.some(item => item === el);
+        }
     };
 
     /*解除限制*/
     const unLimit = (el = null) => {
         if (
-            isIn(el.nodeName.toLowerCase(), allow_list.element) ||
-            isIn(el.id.toLowerCase(), allow_list.id) ||
-            isIn(el.className.toLowerCase(), allow_list.className)
+            isIn(el.nodeName.toLowerCase(), allow_list.element)
+            || isIn(el.id?.toString().toLowerCase(), allow_list.id, 'fancy')
+            || isIn(el.className?.toString().toLowerCase(), allow_list.className, 'fancy')
         ) return;
 
         [
-            "user-select", "-webkit-user-select", "-moz-user-select", "-ms-user-select", "-khtml-user-select", "pointer-events",
+            "user-select", "-webkit-user-select", "-moz-user-select", "-ms-user-select", "-khtml-user-select",
         ].forEach(xcanwin => {
             const ec = el.childNodes;
             const j1 = ec && ec.length == 1 && ec[0] && ec[0].nodeType && ec[0].nodeType == 3;
