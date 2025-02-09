@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unlimit-Web
 // @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
-// @version      12.0
+// @version      13.0
 // @author       xcanwin
 // @namespace    https://github.com/xcanwin/Unlimit-Web/
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
@@ -64,6 +64,23 @@
         });
     };
 
+    /*黑名单: 需解除限制*/
+    const block_list = {
+        // 域名
+        domain: {
+            // 初始化，首次安装插件时使用此列表，之后使用插件存储的列表
+            init: ["www.zhihu.com", "blog.csdn.net","www.bilibili.com","www.360doc.com","guofeng.yuedu.163.com","www.kuwo.cn","chuangshi.qq.com","read.qidian.com","dafrok.github.io","shushan.zhangyue.net","aqistudy.cn","www.xuexila.com","www.51test.net","www.laokaoya.com","utaten.com","book.qq.com","doc.mbalib.com","www.oh100.com","51test.net","www.cspengbo.com","www.diyifanwen.com","www.ahsrst.cn","kt250.com"],
+            // 硬编码，除了使用插件存储的列表，每次也会使用此硬编码列表
+            hard: [],
+        }
+    };
+
+    /*白名单: 指的是放行，无需解除限制*/
+    const allow_list = {
+        // 网页元素
+        element: ['script', 'style', 'video'],
+    };
+
     const symbol = ["❎", "✅"];
     const symbol2 = ["未勾选", "已勾选"];
     let mc = [];
@@ -86,8 +103,15 @@
         }
     };
 
+    /*判断是否包含*/
+    const isIn = (el, list) => {
+        return list.element.some(item => item.toLowerCase() === el.toLowerCase());
+    };
+
     /*解除限制*/
     const unLimit = (el = null) => {
+        if (isIn(el.nodeName, allow_list.element)) return;
+
         [
             "user-select", "-webkit-user-select", "-moz-user-select", "-ms-user-select", "-khtml-user-select", "pointer-events",
         ].forEach(xcanwin => {
@@ -153,7 +177,7 @@
     const switchAuto = (domain) => {
         let autolist = JSON.parse(gv("ul_autolist", "[]"));
         domain = domain ? domain : getdomain();
-        if (autolist.includes(domain)) {
+        if (isIn(domain, autolist)) {
             autolist = autolist.filter(el => el !== domain);
         } else {
             autolist.push(domain);
@@ -170,16 +194,16 @@
 
     /*初始化自动破解列表*/
     const initAutoList = () => {
-        const defaultal = ["www.zhihu.com", "blog.csdn.net","www.bilibili.com","www.360doc.com","guofeng.yuedu.163.com","www.kuwo.cn","chuangshi.qq.com","read.qidian.com","dafrok.github.io","shushan.zhangyue.net","aqistudy.cn","www.xuexila.com","www.51test.net","www.laokaoya.com","utaten.com","book.qq.com","doc.mbalib.com","www.oh100.com","51test.net","www.cspengbo.com","www.diyifanwen.com","www.ahsrst.cn","kt250.com"];
+        const init = block_list.domain.init;
         //为空或者为[]时，说明首次运行，进行初始化
         if (gv("ul_autolist", "[]") === "[]") {
-            sv("ul_autolist", JSON.stringify(defaultal));
+            sv("ul_autolist", JSON.stringify(init));
         }
         //解析移除时，进行初始化
         try {
             JSON.parse(gv("ul_autolist", "[]"));
         } catch (e) {
-            sv("ul_autolist", JSON.stringify(defaultal));
+            sv("ul_autolist", JSON.stringify(init));
         }
     };
 
@@ -194,7 +218,7 @@
         let isauto;
         const autolist = JSON.parse(gv("ul_autolist", "[]"));
         const domain = getdomain();
-        if (autolist.includes(domain)) {
+        if (isIn(domain, autolist.concat(block_list.domain.block))) {
             isauto = 1;
         } else {
             isauto = 0;
@@ -213,7 +237,7 @@
         rmc();
         const autolist = JSON.parse(gv("ul_autolist", "[]"));
         const domain = getdomain();
-        if (autolist.includes(domain)) {
+        if (isIn(domain, autolist.concat(block_list.domain.block))) {
             eNum();
             setInterval(eNum, 3000);
             muob(`*`, $(`body`), (el) => {
