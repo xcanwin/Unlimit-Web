@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unlimit-Web
 // @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
-// @version      13.1
+// @version      14.0
 // @author       xcanwin
 // @namespace    https://github.com/xcanwin/Unlimit-Web/
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
@@ -72,13 +72,17 @@
             init: ["www.zhihu.com", "blog.csdn.net","www.bilibili.com","www.360doc.com","guofeng.yuedu.163.com","www.kuwo.cn","chuangshi.qq.com","read.qidian.com","dafrok.github.io","shushan.zhangyue.net","aqistudy.cn","www.xuexila.com","www.51test.net","www.laokaoya.com","utaten.com","book.qq.com","doc.mbalib.com","www.oh100.com","51test.net","www.cspengbo.com","www.diyifanwen.com","www.ahsrst.cn","kt250.com"],
             // 硬编码，除了使用插件存储的列表，每次也会使用此硬编码列表
             hard: [],
-        }
+        },
     };
 
     /*白名单: 指的是放行，无需解除限制*/
     const allow_list = {
-        // 网页元素
+        // 网页元素名称
         element: ['script', 'style', 'video'],
+        // 网页元素id
+        id: ['player', 'video'],
+        // 网页元素className
+        className: ['player', 'video'],
     };
 
     const symbol = ["❎", "✅"];
@@ -110,7 +114,11 @@
 
     /*解除限制*/
     const unLimit = (el = null) => {
-        if (isIn(el.nodeName, allow_list.element)) return;
+        if (
+            isIn(el.nodeName, allow_list.element) ||
+            isIn(el.id, allow_list.id) ||
+            isIn(el.className, allow_list.className)
+        ) return;
 
         [
             "user-select", "-webkit-user-select", "-moz-user-select", "-ms-user-select", "-khtml-user-select", "pointer-events",
