@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unlimit-Web
 // @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
-// @version      14.0
+// @version      15.0
 // @author       xcanwin
 // @namespace    https://github.com/xcanwin/Unlimit-Web/
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
@@ -97,8 +97,8 @@
         return GM_getValue(key, value);
     };
 
-    /*枚举元素*/
-    const eNum = (EL = null) => {
+    /*枚举网页元素*/
+    const eNumUnLimit = (EL = document) => {
         $$("*", EL).forEach(unLimit);
         try {
             console.clear = () => {};
@@ -192,7 +192,7 @@
         }
         sv("ul_autolist", JSON.stringify(autolist));
         rmc();
-        unLimit();
+        eNumUnLimit();
     };
 
     /*查看自动破解列表*/
@@ -231,8 +231,8 @@
         } else {
             isauto = 0;
         }
-        mc.push(GM_registerMenuCommand(`查看自动破解列表`, showAuto));
-        mc.push(GM_registerMenuCommand(`临时破解：${domain}`, unLimit));
+        mc.push(GM_registerMenuCommand(`查看自动破解列表`, () => showAuto()));
+        mc.push(GM_registerMenuCommand(`临时破解：${domain}`, () => eNumUnLimit()));
         mc.push(GM_registerMenuCommand(`自动破解：${domain} ${symbol[isauto]}${symbol2[isauto]}`, () => switchAuto(domain)));
     };
 
@@ -246,11 +246,9 @@
         const autolist = JSON.parse(gv("ul_autolist", "[]"));
         const domain = getdomain();
         if (isIn(domain, autolist.concat(block_list.domain.hard))) {
-            eNum();
-            setInterval(eNum, 3000);
-            muob(`*`, $(`body`), (el) => {
-                unLimit(el);
-            });
+            eNumUnLimit();
+            setInterval(() => eNumUnLimit(), 3000);
+            muob(`*`, $(`body`), unLimit);
         }
     };
 
