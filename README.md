@@ -81,7 +81,3 @@
 - [www.ahsrst.cn](https://www.ahsrst.cn/a/202204/537959.html)
 - [www.kt250.com](https://www.kt250.com/fanwen/shixizongjie/2869992.html)
 - [boke112.com](https://boke112.com/article/cloudflare-brotli-auto-minify.html)
-
-## 友情链接
-
-需要对百x度文库、道x客巴巴等文库类网站解除限制的伙伴可以试试隔壁老哥的项目 [TKScript](https://greasyfork.org/zh-CN/scripts/405130-%E6%96%87%E6%9C%AC%E9%80%89%E4%B8%AD%E5%A4%8D%E5%88%B6)
