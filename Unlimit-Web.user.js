@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unlimit-Web
 // @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
-// @version      16.1
+// @version      17.0
 // @author       xcanwin
 // @namespace    https://github.com/xcanwin/Unlimit-Web/
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
@@ -37,6 +37,7 @@
 // @grant        GM_setValue
 // @grant        GM_registerMenuCommand
 // @grant        GM_unregisterMenuCommand
+// @grant        GM_addStyle
 // @run-at       document-end
 // @downloadURL https://update.greasyfork.org/scripts/400515/Unlimit-Web.user.js
 // @updateURL https://update.greasyfork.org/scripts/400515/Unlimit-Web.meta.js
@@ -99,8 +100,29 @@
         return GM_getValue(key, value);
     };
 
+    const purify_style = `
+.unslcl {
+    /* 浅色模式下的文本选中样式 */
+    @media (prefers-color-scheme: light) {
+        :not(foo):not(bar):not(baz):not(qux)::selection {
+          background-color: #007BFF !important;
+          color: white !important;
+        }
+    }
+
+    /* 深色模式下的文本选中样式 */
+    @media (prefers-color-scheme: dark) {
+        :not(foo):not(bar):not(baz):not(qux)::selection {
+          background-color: #5DACDD !important;
+          color: black !important;
+        }
+    }
+}
+`;
+
     /*枚举网页元素*/
     const eNumUnLimit = (EL = document) => {
+        $('html').classList.add('unslcl');
         $$("*", EL).forEach(unLimit);
         try {
             console.clear = () => {};
@@ -266,6 +288,7 @@
         }
     };
 
+    GM_addStyle(purify_style);
     main();
 
 })();
