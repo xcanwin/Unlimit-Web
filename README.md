@@ -80,6 +80,7 @@
 - [www.diyifanwen.com](https://www.diyifanwen.com/fanwen/chunjie/5063917.html)
 - [www.ahsrst.cn](https://www.ahsrst.cn/a/202204/537959.html)
 - [www.kt250.com](https://www.kt250.com/fanwen/shixizongjie/2869992.html)
+- [boke112.com](https://boke112.com/article/cloudflare-brotli-auto-minify.html)
 
 ## 友情链接
 
