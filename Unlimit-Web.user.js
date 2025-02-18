@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unlimit-Web
 // @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
-// @version      17.0
+// @version      17.1
 // @author       xcanwin
 // @namespace    https://github.com/xcanwin/Unlimit-Web/
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
@@ -32,6 +32,7 @@
 // @match        *://www.diyifanwen.com/*
 // @match        *://www.ahsrst.cn/*
 // @match        *://kt250.com/*
+// @match        *://boke112.com/*
 // @match        *://*/*
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -72,7 +73,7 @@
         // 域名
         domain: {
             // 初始化，首次安装插件时使用此列表，之后使用插件存储的列表
-            init: ["www.zhihu.com", "blog.csdn.net","www.bilibili.com","www.cnblogs.com","www.360doc.com","blog.51cto.com","guofeng.yuedu.163.com","www.kuwo.cn","chuangshi.qq.com","read.qidian.com","dafrok.github.io","shushan.zhangyue.net","aqistudy.cn","www.xuexila.com","www.51test.net","www.laokaoya.com","utaten.com","book.qq.com","doc.mbalib.com","www.oh100.com","51test.net","www.cspengbo.com","www.diyifanwen.com","www.ahsrst.cn","kt250.com"],
+            init: ["www.zhihu.com", "blog.csdn.net","www.bilibili.com","www.cnblogs.com","www.360doc.com","blog.51cto.com","guofeng.yuedu.163.com","www.kuwo.cn","chuangshi.qq.com","read.qidian.com","dafrok.github.io","shushan.zhangyue.net","aqistudy.cn","www.xuexila.com","www.51test.net","www.laokaoya.com","utaten.com","book.qq.com","doc.mbalib.com","www.oh100.com","51test.net","www.cspengbo.com","www.diyifanwen.com","www.ahsrst.cn","kt250.com","boke112.com"],
             // 硬编码，除了使用插件存储的列表，每次也会使用此硬编码列表
             hard: [],
         },
