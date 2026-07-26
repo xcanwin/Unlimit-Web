@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Unlimit-Web
+// @name         解除网页限制-Unlimit-Web
 // @description  解除网页限制: 恢复文本的选中和复制, 过滤文本小尾巴, 恢复右键菜单. Remove webpage restrictions: restore the selection and copy of text, clear the text tail, and restore the right-click menu.
-// @version      17.2
+// @version      18.0
 // @author       xcanwin
 // @namespace    https://github.com/xcanwin/Unlimit-Web/
 // @supportURL   https://github.com/xcanwin/Unlimit-Web/
@@ -234,8 +234,100 @@
 
     /*查看自动破解列表*/
     const showAuto = () => {
-        prompt("自动破解列表", gv("ul_autolist", "[]"));
+        // 避免重复弹窗
+        if ($('#ul-modal-mask')) return;
+
+        let list;
+        try {
+            list = JSON.parse(gv("ul_autolist", "[]"));
+        } catch (e) {
+            list = [];
+        }
+        // 每行一个域名，对小白用户更友好
+        const value = list.join("\n");
+
+        const mask = document.createElement('div');
+        mask.id = 'ul-modal-mask';
+        mask.innerHTML = `
+<div id="ul-modal">
+    <div id="ul-modal-head">自动破解列表</div>
+    <div id="ul-modal-tip">每行填写一个网址域名，例如：www.google.com</div>
+    <textarea id="ul-modal-text" spellcheck="false" placeholder="每行一个域名">${value.replace(/</g, '&lt;')}</textarea>
+    <div id="ul-modal-foot">
+        <button id="ul-modal-cancel" type="button">取消</button>
+        <button id="ul-modal-save" type="button">保存</button>
+    </div>
+</div>`;
+        document.body.appendChild(mask);
+
+        const close = () => mask.remove();
+        $('#ul-modal-cancel', mask).onclick = close;
+        mask.onclick = e => { if (e.target === mask) close(); };
+        $('#ul-modal-save', mask).onclick = () => {
+            // 按行拆分，去掉空行和首尾空白，并去重
+            const arr = [...new Set(
+                $('#ul-modal-text', mask).value
+                    .split("\n")
+                    .map(s => s.trim())
+                    .filter(s => s)
+            )];
+            sv("ul_autolist", JSON.stringify(arr));
+            rmc();
+            close();
+        };
     };
+
+    const modal_style = `
+#ul-modal-mask {
+    position: fixed; inset: 0; z-index: 2147483647;
+    background: rgba(0, 0, 0, .45);
+    display: flex; align-items: center; justify-content: center;
+    font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+#ul-modal {
+    width: 420px; max-width: 90vw;
+    background: #fff; color: #1f2328;
+    border-radius: 12px; overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .25);
+}
+#ul-modal-head {
+    padding: 16px 20px; font-size: 16px; font-weight: 600;
+    border-bottom: 1px solid #eef0f2;
+}
+#ul-modal-tip {
+    padding: 12px 20px 0; font-size: 12px; color: #8a9099; line-height: 1.5;
+}
+#ul-modal-text {
+    display: block; box-sizing: border-box;
+    width: calc(100% - 40px); height: 220px; resize: vertical;
+    padding: 12px 14px; border: 1px solid #d5d8dc; border-radius: 8px;
+    margin: 10px 20px 16px;
+    font: 13px/1.6 ui-monospace, Menlo, Consolas, monospace;
+    color: #1f2328; background: #fafbfc; outline: none;
+}
+#ul-modal-text:focus { border-color: #007BFF; }
+#ul-modal-foot {
+    display: flex; justify-content: flex-end; gap: 10px;
+    padding: 0 20px 18px;
+}
+#ul-modal-foot button {
+    padding: 8px 20px; border-radius: 8px; font-size: 14px;
+    cursor: pointer; border: 1px solid transparent; transition: .15s;
+}
+#ul-modal-cancel { background: #f2f3f5; color: #40454c; border-color: #e2e4e8; }
+#ul-modal-cancel:hover { background: #e7e9ec; }
+#ul-modal-save { background: #007BFF; color: #fff; }
+#ul-modal-save:hover { background: #0069d9; }
+@media (prefers-color-scheme: dark) {
+    #ul-modal { background: #1f2226; color: #e6e8eb; }
+    #ul-modal-head { border-bottom-color: #33373d; }
+    #ul-modal-tip { color: #9aa1ab; }
+    #ul-modal-text { background: #17191d; color: #e6e8eb; border-color: #3a3f46; }
+    #ul-modal-cancel { background: #2b2f35; color: #d0d3d8; border-color: #3a3f46; }
+    #ul-modal-cancel:hover { background: #343941; }
+}
+`;
+    GM_addStyle(modal_style);
 
     /*初始化自动破解列表*/
     const initAutoList = () => {
